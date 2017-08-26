@@ -1,7 +1,6 @@
 import scrapy
 import json
 
-
 class ClothingDescriptionSpdider(scrapy.Spider):
     name = "clothing"
     start_urls = [
@@ -10,7 +9,7 @@ class ClothingDescriptionSpdider(scrapy.Spider):
 
     def parse(self, response):
         jsonresponse = json.loads(response.body_as_unicode())
-        # current_page = json['product_pages']['current_page']
+        next_page = jsonresponse['product_pages']['next_page']
+        count_per_page = 20
         products = jsonresponse['products']
-        for product in products:
-            print product
+        print(json.dumps(products, indent=2))
